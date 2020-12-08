@@ -5,5 +5,5 @@ How to install:
 3. do composer install
 4. do npm install && npm run dev
 5. copy .env.example to .env
-6. do php artisan key generate
+6. do php artisan key:generate
 7. edit your .env with your settings
