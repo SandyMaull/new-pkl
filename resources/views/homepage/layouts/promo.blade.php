@@ -1,4 +1,4 @@
-<div class="hero__item set-bg" data-setbg="{{ asset('ogani/img/hero/banner.jpg') }}">
+<div class="hero__item set-bg" data-setbg="{{ asset('img/banner/'. $fbanner->gambar) }}">
     <div class="hero__text">
         <span>FRESH FRUIT</span>
         <h2>Vegetable <br/>100% Organic</h2>

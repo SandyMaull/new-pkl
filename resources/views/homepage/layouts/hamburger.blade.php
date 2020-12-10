@@ -2,24 +2,33 @@
     <a href="#"><img src="{{ asset('ogani/img/logo.png') }}" alt=""></a>
 </div>
 <div class="hamburger__menu__cart">
-    <ul>
-        <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
-        <li><a href="#"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
-    </ul>
-    <div class="header__cart__price"><span>$10.00</span></div>
+    @if (!Auth::guest())
+        <ul>
+            <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
+            <li><a href="#"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
+        </ul>
+        <div class="header__cart__price"><span>$10.00</span></div>
+    @endif
 </div>
 <div class="hamburger__menu__widget">
-    <div class="header__top__right__language">
-        <img src="{{ asset('ogani/img/language.png') }}" alt="">
-        <div>English</div>
-        <span class="arrow_carrot-down"></span>
-        <ul>
-            <li><a href="#">Spanish</a></li>
-            <li><a href="#">English</a></li>
-        </ul>
-    </div>
+    @if (!Auth::guest())
+        <div class="header__top__right__language">
+            {{ Auth::user()->username }}
+        </div>
+    @endif
     <div class="header__top__right__auth">
-        <a href="{{ route('login') }}"><i class="fa fa-user"></i> Login</a>
+        @if (Auth::guest())
+            <a href="{{ route('login') }}"><i class="fa fa-user"></i> Login</a>
+        @else
+            <a href="{{ route('logout') }}" onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                {{ __('Logout') }}
+            </a>
+
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                @csrf
+            </form>
+        @endif
     </div>
 </div>
 <nav class="hamburger__menu__nav mobile-menu">

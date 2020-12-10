@@ -29,6 +29,11 @@
     <link rel="stylesheet" href="{{ asset('admin/plugins/summernote/summernote-bs4.css') }}">
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('admin/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css') }}">
+
+
+    @yield('css')
+
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -91,10 +96,63 @@
     <script src="{{ asset('admin/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}"></script>
     <!-- AdminLTE App -->
     <script src="{{ asset('admin/dist/js/adminlte.js') }}"></script>
-    <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-    {{-- <script src="{{ asset('admin/dist/js/pages/dashboard.js') }}"></script> --}}
-    <!-- AdminLTE for demo purposes -->
-    {{-- <script src="{{ asset('admin/dist/js/demo.js') }}"></script> --}}
+    <script src="{{ asset('admin/plugins/sweetalert2/sweetalert2.min.js') }}"></script>
+    
+    @if (session('status') == 'sukses')
+      <script type="text/javascript">
+        $(function() {
+          const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000
+          });
+          Toast.fire({
+            icon: 'success',
+            title: '{{session('message')}}'
+          })
+        });
+      </script>
+    @endif
+
+    @if (session('status') == 'error')
+      <script type="text/javascript">
+        $(function() {
+          const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000
+          });
+          Toast.fire({
+            icon: 'error',
+            title: '{{session('message')}}'
+          })
+        });
+      </script>
+    @endif
+    @if ($errors->count() > 0)
+      @foreach ($errors->all() as $error)
+        <script type="text/javascript">
+          var error = '{{ $error }}';
+          $(function() {
+            const Toast = Swal.mixin({
+              toast: true,
+              position: 'top-end',
+              showConfirmButton: false,
+              timer: 3000
+            });
+            Toast.fire({
+              icon: 'error',
+              title: error
+            });
+          });
+        </script>
+      @endforeach
+    @endif
+
+    @yield('script')
+
 </body>
 
 </html>

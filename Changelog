@@ -1,0 +1,6 @@
+Versi 0.0.1 Alpha
+    - Login System
+    - Tampilan Admin + Homepage
+    - Multi Roles + Authorization (Admin, User)
+    - Admin Module (Tambah Kategori, Ubah Kategori, Hapus Kategori, Tambah Produk, Ubah Produk, Hapus Produk)
+    - User Module (Lihat Kategori, Lihat Produk)

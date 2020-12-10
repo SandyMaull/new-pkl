@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="{{ asset('ogani/css/nice-select.css')}}" type="text/css">
     <link rel="stylesheet" href="{{ asset('ogani/css/jquery-ui.min.css')}}" type="text/css">
     <link rel="stylesheet" href="{{ asset('ogani/css/owl.carousel.min.css')}}" type="text/css">
+    <link rel="stylesheet" href="{{ asset('admin/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css') }}">
     <link rel="stylesheet" href="{{ asset('ogani/css/slicknav.min.css')}}" type="text/css">
 
     <link rel="stylesheet" href="{{ asset('ogani/sass/style.css') }}" type="text/css"> <!-- change sass to css in the end  -->
@@ -93,6 +94,50 @@
     <script src="{{ asset('ogani/js/mixitup.min.js') }}"></script>
     <script src="{{ asset('ogani/js/owl.carousel.min.js') }}"></script>
     <script src="{{ asset('ogani/js/main.js') }}"></script>
+    <script src="{{ asset('admin/plugins/sweetalert2/sweetalert2.min.js') }}"></script>
+
+    @yield('script')
+
+    @if (session('status') == 'sukses')
+    <script type="text/javascript">
+      $(function() {
+        const Toast = Swal.mixin({
+          toast: true,
+          position: 'top-end',
+          showConfirmButton: false,
+          timer: 3000
+        });
+    
+        Toast.fire({
+          icon: 'success',
+          title: '{{session('message')}}'
+        })
+            
+        
+      });
+    
+    </script>
+    @endif
+    @if (session('status') == 'error')
+    <script type="text/javascript">
+      $(function() {
+        const Toast = Swal.mixin({
+          toast: true,
+          position: 'top-end',
+          showConfirmButton: false,
+          timer: 3000
+        });
+    
+        Toast.fire({
+          icon: 'error',
+          title: '{{session('message')}}'
+        })
+            
+        
+      });
+    
+    </script>
+    @endif
 </body>
 
 </html>

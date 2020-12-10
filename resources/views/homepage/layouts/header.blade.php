@@ -13,23 +13,25 @@
             <div class="col-lg-6 col-md-6">
                 <!-- Right side of header -->
                 <div class="header__top__right">
-                    <div class="header__top__right__social">
-                        <a href="#"><i class="fa fa-facebook"></i></a>
-                        <a href="#"><i class="fa fa-twitter"></i></a>
-                        <a href="#"><i class="fa fa-linkedin"></i></a>
-                        <a href="#"><i class="fa fa-pinterest-p"></i></a>
-                    </div>
-                    <div class="header__top__right__language">
-                        <img src="{{ asset('ogani/img/language.png') }}" alt="">
-                        <div>English</div>
-                        <span class="arrow_carrot-down"></span>
-                        <ul>
-                            <li><a href="#">Spanish</a></li>
-                            <li><a href="#">English</a></li>
-                        </ul>
-                    </div>
+                    @if (!Auth::guest())
+                        <div class="header__top__right__language">
+                            {{ Auth::user()->username }}
+                        </div>
+                    @endif
                     <div class="header__top__right__auth">
-                        <a href="{{ route('login') }}"><i class="fa fa-user"></i> Login</a>
+                        @if (Auth::guest())
+                            <a href="{{ route('login') }}"><i class="fa fa-user"></i> Login</a>
+                        @else
+                            {{-- <a href="{{ route('logout') }}">Logout</a> --}}
+                            <a href="{{ route('logout') }}" onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                {{ __('Logout') }}
+                            </a>
+
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                @csrf
+                            </form>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -64,11 +66,13 @@
         </div>
         <div class="col-lg-3">
             <div class="header__cart">
-                <ul>
-                    <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
-                    <li><a href="#"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
-                </ul>
-                <div class="header__cart__price"><span>$10.00</span></div>
+                @if (!Auth::guest())
+                    <ul>
+                        <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
+                        <li><a href="#"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
+                    </ul>
+                    <div class="header__cart__price"><span>$10.00</span></div>
+                @endif
             </div>
         </div>
     </div>
